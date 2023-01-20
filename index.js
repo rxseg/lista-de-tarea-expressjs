@@ -7,7 +7,21 @@ const tareasIncompletas = require("./router/list-view-router2");
 const putTask = require("./router/list-put-router");
 const db = require("./db.json");
 const deleteTask = require("./router/list-delete-router");
-//Routers
+const cors = require("cors");
+const methods = require("./middlewares/methods");
+const rutaValidada = require("./middlewares/ruta");
+
+//Routers & Middlewares
+app.use(rutaValidada);
+app.use(methods);
+app.use(
+  cors({
+    origin: "*",
+    credentials: false,
+  })
+);
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use("/completed-tasks", tareasCompletas);
 app.use("/incompleted-tasks", tareasIncompletas);
 app.use("/tasks", postTask);
@@ -16,12 +30,10 @@ app.use("/tasks", deleteTask);
 //Vista principal
 app.get("/", (req, res) => {
   res.status(200).send("Welcome to my Task List server ");
-  res.send();
 });
 //Vista de tareas
 app.get("/tasks", (req, res) => {
-  res.json(db);
-  res.end();
+  res.status(200).json(db);
 });
 
 app.listen(port, () => {

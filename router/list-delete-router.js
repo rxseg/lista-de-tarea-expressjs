@@ -9,7 +9,7 @@ deleteTask.delete("/:id", (req, res) => {
   const { id } = req.params;
   const eraser = db.filter((task) => task.id != id);
   fs.writeFileSync("db.json", JSON.stringify(eraser));
-  res.json({ message: `Task ${id} have been deleted`, eraser });
+  res.json({ message: `Task ${id} have been deleted successfully` });
   res.end();
 });
 

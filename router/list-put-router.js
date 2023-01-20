@@ -2,7 +2,7 @@ const express = require("express");
 const putTask = express.Router();
 const fs = require("fs");
 
-putTask.put("/:id", express.json(), (req, res) => {
+putTask.put("/:id", (req, res) => {
   const id = req.params.id;
   const db = JSON.parse(fs.readFileSync("db.json", "utf-8"));
   db.forEach((item) => {
@@ -13,7 +13,7 @@ putTask.put("/:id", express.json(), (req, res) => {
     }
   });
   fs.writeFileSync("db.json", JSON.stringify(db));
-  res.json({ message: `Task ${id} have been updated` });
+  res.json({ message: `Task ${id} have been updated successfully` });
   res.end();
 });
 module.exports = putTask;

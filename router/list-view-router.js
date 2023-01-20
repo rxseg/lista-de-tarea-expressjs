@@ -2,7 +2,7 @@ const express = require("express");
 const tareasCompletas = express.Router();
 const db = require("../db.json");
 
-tareasCompletas.get("/", express.json(), (req, res) => {
+tareasCompletas.get("/", (req, res) => {
   const filter = db.filter((item) => item.estado === true);
   res.json(filter);
   res.end();
