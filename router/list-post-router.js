@@ -2,8 +2,10 @@ const express = require("express");
 const postTask = express.Router();
 const fs = require("fs");
 const db = require("../db.json");
+const attributes = require("../middlewares/attribute-post");
+const voidPost = require("../middlewares/void-body");
 
-postTask.post("/", (req, res) => {
+postTask.post("/", voidPost, attributes, (req, res) => {
   const body = req.body;
   db.push(body);
   fs.writeFileSync("db.json", JSON.stringify(db), (error) => {
@@ -12,7 +14,6 @@ postTask.post("/", (req, res) => {
   });
   console.log({ body });
   res.json({ message: "Task created successfully" });
-  res.end();
 });
 
 module.exports = postTask;

@@ -4,9 +4,10 @@ const rutaValidada = (req, res, next) => {
     url != "/" &&
     url != "/tasks" &&
     url != "/completed-tasks" &&
-    url != "/incompleted-tasks"
+    url != "/incompleted-tasks" &&
+    url != "/home"
   ) {
-    return res.status(405).send(url);
+    return res.status(404).send("Parámetros inválidos brou");
   } else {
     next();
   }

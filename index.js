@@ -10,8 +10,10 @@ const deleteTask = require("./router/list-delete-router");
 const cors = require("cors");
 const methods = require("./middlewares/methods");
 const rutaValidada = require("./middlewares/ruta");
+const authorization = require("./middlewares/authorization");
 
 //Routers & Middlewares
+app.use(authorization);
 app.use(rutaValidada);
 app.use(methods);
 app.use(
@@ -28,7 +30,7 @@ app.use("/tasks", postTask);
 app.use("/tasks", putTask);
 app.use("/tasks", deleteTask);
 //Vista principal
-app.get("/", (req, res) => {
+app.get("/home", (req, res) => {
   res.status(200).send("Welcome to my Task List server ");
 });
 //Vista de tareas
