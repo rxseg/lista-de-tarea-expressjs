@@ -1,4 +1,4 @@
-const attributes = (req, res, next) => {
+const   attributes = (req, res, next) => {
   const { body } = req;
 
   if (Object.keys(body).length < 2)
